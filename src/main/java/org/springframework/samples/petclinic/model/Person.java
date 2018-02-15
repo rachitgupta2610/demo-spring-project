@@ -17,7 +17,8 @@ package org.springframework.samples.petclinic.model;
 
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
-import javax.validation.constraints.NotEmpty;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 /**
  * Simple JavaBean domain object representing an person.
@@ -29,11 +30,11 @@ public class Person extends BaseEntity {
 
     @Column(name = "first_name")
     @NotEmpty
-    private String firstName;
+    protected String firstName;
 
     @Column(name = "last_name")
     @NotEmpty
-    private String lastName;
+    protected String lastName;
 
     public String getFirstName() {
         return this.firstName;
@@ -50,5 +51,6 @@ public class Person extends BaseEntity {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
+
 
 }

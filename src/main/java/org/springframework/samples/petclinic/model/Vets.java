@@ -15,33 +15,29 @@
  */
 package org.springframework.samples.petclinic.model;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- * Simple JavaBean domain object with an id property. Used as a base class for objects needing this property.
+ * Simple domain object representing a list of veterinarians. Mostly here to be used for the 'vets' {@link
+ * org.springframework.web.servlet.view.xml.MarshallingView}.
  *
- * @author Ken Krebs
- * @author Juergen Hoeller
+ * @author Arjen Poutsma
  */
-@MappedSuperclass
-public class BaseEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    protected Integer id;
+@XmlRootElement
+public class Vets {
 
-    public Integer getId() {
-        return id;
-    }
+    private List<Vet> vets;
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public boolean isNew() {
-        return this.id == null;
+    @XmlElement
+    public List<Vet> getVetList() {
+        if (vets == null) {
+            vets = new ArrayList<>();
+        }
+        return vets;
     }
 
 }

@@ -13,35 +13,36 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springframework.samples.petclinic.model;
+package org.springframework.samples.petclinic.repository.jdbc;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
+import org.springframework.samples.petclinic.model.Pet;
 
 /**
- * Simple JavaBean domain object with an id property. Used as a base class for objects needing this property.
+ * Subclass of Pet that carries temporary id properties which are only relevant for a JDBC implementation of the
+ * PetRepository.
  *
- * @author Ken Krebs
  * @author Juergen Hoeller
  */
-@MappedSuperclass
-public class BaseEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    protected Integer id;
+class JdbcPet extends Pet {
 
-    public Integer getId() {
-        return id;
+    private int typeId;
+
+    private int ownerId;
+
+    public int getTypeId() {
+        return this.typeId;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setTypeId(int typeId) {
+        this.typeId = typeId;
     }
 
-    public boolean isNew() {
-        return this.id == null;
+    public int getOwnerId() {
+        return this.ownerId;
+    }
+
+    public void setOwnerId(int ownerId) {
+        this.ownerId = ownerId;
     }
 
 }
